@@ -4,7 +4,7 @@
  * 
  */
 
-var databaseCON = require("../database");//Imported my database.js
+var databaseCON = require("./database");//Imported my database.js
 var connection = databaseCON.getconnection();
 connection.connect();//Use the connect() method to establish a connection with the MySQL database
 var express = require('express');
@@ -20,7 +20,7 @@ router.get("/fundraiser", (req, res) => {
             res.send(records); //Return all records in the funder table
         }
     });
-});
+});// test ok
 
 //GET method: Retrieve all active fundraisers, including categories
 router.get("/active", (req, res) => {
@@ -36,7 +36,7 @@ router.get("/active", (req, res) => {
             }
         }
     );
-});
+});//ok
 
 //GET method: Retrieve all categories
 router.get("/categories", (req, res) => {
