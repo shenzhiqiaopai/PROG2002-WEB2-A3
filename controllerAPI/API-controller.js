@@ -122,40 +122,6 @@ router.get("/:id", (req, res) => {
 module.exports = router;//Export the router so it can be used in other modules.
 // /////////////////////// New code //////////////////////////////////
 
-// GET method: Retrieve fundraiser details including donation list
-router.get("/:id", (req, res) => {
-    const query = `
-        SELECT FUNDRAISER.*, CATEGORY.NAME AS category_name, DONATION.amount, DONATION.date
-        FROM FUNDRAISER
-        JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID
-        LEFT JOIN DONATION ON FUNDRAISER.FUNDRAISER_ID = DONATION.FUNDRAISER_ID
-        WHERE FUNDRAISER.FUNDRAISER_ID = ? ORDER BY DONATION.date DESC`;
-    connection.query(query, [req.params.id], (err, records) => {
-        if (err) {
-            console.error("Failed to retrieve fundraiser details:", err);
-        } else {
-            res.send(records);
-        }
-    });
-});
-
-// GET method: Retrieve fundraiser details including donation list
-router.get("/:id", (req, res) => {
-    const query = `
-        SELECT FUNDRAISER.*, CATEGORY.NAME AS category_name, DONATION.amount, DONATION.date
-        FROM FUNDRAISER
-        JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID
-        LEFT JOIN DONATION ON FUNDRAISER.FUNDRAISER_ID = DONATION.FUNDRAISER_ID
-        WHERE FUNDRAISER.FUNDRAISER_ID = ? ORDER BY DONATION.date DESC`;
-    connection.query(query, [req.params.id], (err, records) => {
-        if (err) {
-            console.error("Failed to retrieve fundraiser details:", err);
-        } else {
-            res.send(records);
-        }
-    });
-});
-
 // POST method: Insert a new fundraiser
 router.post("/fundraiser", (req, res) => {
     const { organizer, caption, targetFunding, currentFunding, city, active, categoryId } = req.body;
@@ -195,6 +161,26 @@ router.delete("/fundraiser/:id", (req, res) => {
             res.status(400).send("Cannot delete fundraiser with donations");
         } else {
             res.send({ message: "Fundraiser deleted successfully" });
+        }
+    });
+});
+
+// POST method: Insert a new donation for a nominated fundraiser
+router.post("/donation", (req, res) => {
+    const { amount, fundraiserId, donorName } = req.body;
+    
+    // 确保客户端提交了所有必要的信息
+    if (!amount || !fundraiserId || !donorName) {
+        return res.status(400).send("Missing required donation information");
+    }
+
+    const query = "INSERT INTO DONATION (amount, FUNDRAISER_ID, DONOR_NAME) VALUES (?, ?, ?)";
+    connection.query(query, [amount, fundraiserId, donorName], (err, result) => {
+        if (err) {
+            console.error("Failed to insert donation:", err);
+            res.status(500).send("Server error");
+        } else {
+            res.send({ message: "Donation created successfully", donationId: result.insertId });
         }
     });
 });
