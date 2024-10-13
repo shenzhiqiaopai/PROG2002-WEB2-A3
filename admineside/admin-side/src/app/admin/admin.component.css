@@ -1,0 +1,115 @@
+/* This is the CSS file of my web development 2 assignment 3 management website */
+/* Author: Qiao Kang */
+/* Basic Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4; /* Background color */
+}
+
+/* Container Styles */
+.admin-container {
+  max-width: 800px; /* Maximum container width */
+  margin: 20px auto; /* Center alignment */
+  padding: 20px; /* Inner padding */
+  background-color: white; /* Background color */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+/* Header Styles */
+.header {
+  background-color: #003366; /* Dark blue */
+  color: white; /* White text */
+  padding: 10px 0; /* Inner padding */
+  padding-left: 20px; /* Left inner padding */
+  text-align: left; /* Text aligned to the left */
+  border-radius: 8px 8px 0 0; /* Rounded corners */
+}
+
+/* Form Styles */
+h2 {
+  color: #003366; /* Dark blue */
+  border-bottom: 2px solid #003366; /* Bottom border */
+  padding-bottom: 5px; /* Bottom padding */
+}
+
+form {
+  margin-bottom: 20px; /* Form spacing */
+}
+
+input, select, button {
+  width: 100%; /* Full width */
+  padding: 10px; /* Inner padding */
+  margin: 10px 0; /* Outer margin */
+  border: 1px solid #ddd; /* Border style */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+}
+
+/* Button Styles */
+button {
+  background-color: #003366; /* Dark blue */
+  color: white; /* White text */
+  cursor: pointer; /* Mouse pointer style */
+}
+
+button:hover {
+  background-color: #00509e; /* Hover effect */
+}
+
+.fundraiser-item {
+  padding: 10px;
+  background-color: #f8f9fa;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: block; /* block for vertical arrangement */
+}
+
+/* Adjust spacing and display effect for each paragraph */
+.fundraiser-item p {
+  margin: 5px 0; /* Add vertical spacing between paragraphs */
+}
+
+/* Styles for the delete button */
+.delete-button {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Error Message */
+.error {
+  color: red; /* Set font color to red */
+}
+
+/* Footer Styles */
+.footer {
+  text-align: center; /* Center text */
+  padding: 10px; /* Inner padding */
+  background-color: #003366; /* Dark blue */
+  color: white; /* White text */
+  position: relative; /* Relative positioning */
+  bottom: 0; /* Position */
+  width: 100%; /* Width */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .admin-container {
+    padding: 15px; /* Reduce inner padding */
+  }
+
+  h2 {
+    font-size: 20px; /* Font size for small screens */
+  }
+
+  #fundraiser-list li p {
+    font-size: 14px; /* Slightly smaller font for small screens */
+  }
+}

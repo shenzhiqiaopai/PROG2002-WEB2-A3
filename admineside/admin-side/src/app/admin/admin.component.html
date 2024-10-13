@@ -1,0 +1,248 @@
+<!-- This is the HTML file of my web development 2 assignment 3 management website -->
+<!-- Author: Qiao Kang -->
+<div class="admin-container">
+    <!-- Website Title  -->
+  <header class="header">
+      <h1>Admin Dashboard</h1>
+  </header>
+
+
+  <!-- Section for Adding a New Fundraiser -->
+    <h2>Add New Fundraiser</h2>
+    <form #fundraiserForm="ngForm" (ngSubmit)="addFundraiser(fundraiserForm)" novalidate>
+        <!-- Used to add organizers. If not filled in, it will show that adding organizers is required. And it will be marked in red -->
+        <label for="organizer">Organizer:</label>
+        <input 
+        type="text" 
+        placeholder="Please Entre Organizer" 
+        required 
+        [(ngModel)]="newFundraiser.ORGANIZER" 
+        name="organizer" 
+        #organizer="ngModel" />
+        <!-- When the user interacts in the input box and leaves the control, that is, if the field is not filled in, an error will be reported. -->
+        <div *ngIf="organizer.invalid && organizer.touched" class="error">
+            Organizer is required.
+        </div>
+
+        <!-- Same as above -->
+        <label for="caption">Caption:</label>
+        <input 
+        type="text" 
+        placeholder="Please Entre Caption" 
+        required 
+        [(ngModel)]="newFundraiser.CAPTION" 
+        name="caption" 
+        #caption="ngModel" />
+        <div *ngIf="caption.invalid && caption.touched" class="error">
+            Caption is required.
+        </div>
+
+        <!-- The minimum value cannot be less than 0 -->
+        <label for="targetFunding">Target Funding:</label>
+        <input 
+        type="number" 
+        placeholder="Please Entre Target Funding" 
+        required 
+        [(ngModel)]="newFundraiser.TARGET_FUNDING" 
+        name="targetFunding" 
+        min="0" 
+        #targetFunding="ngModel" />
+        <div *ngIf="targetFunding.invalid && targetFunding.touched" class="error">
+            Target Funding is required and must be 0 or higher.
+        </div>
+
+        <!-- The minimum value cannot be less than 0 -->
+        <label for="currentFunding">Current Funding:</label>
+        <input 
+        type="number" 
+        placeholder="Please Entre Current Funding" 
+        required 
+        [(ngModel)]="newFundraiser.CURRENT_FUNDING" 
+        name="currentFunding" 
+        min="0" 
+        #currentFunding="ngModel" />
+        <div *ngIf="currentFunding.invalid && currentFunding.touched" class="error">
+            Current Funding is required and must be 0 or higher.
+        </div>
+
+        <label for="city">City:</label>
+        <input 
+        type="text" 
+        placeholder="Please Entre City" 
+        required 
+        [(ngModel)]="newFundraiser.CITY" 
+        name="city" 
+        #city="ngModel" />
+        <div *ngIf="city.invalid && city.touched" class="error">
+            City is required.
+        </div>
+
+        <!-- Select whether the artist is active -->
+        <label for="active">Active:</label>
+        <select 
+        required 
+        [(ngModel)]="newFundraiser.ACTIVE" 
+        name="active" 
+        #active="ngModel">
+            <option [ngValue]="true">Active</option>
+            <option [ngValue]="false">Inactive</option>
+        </select>
+        <div *ngIf="active.invalid && active.touched" class="error">
+            Status is required.
+        </div>
+
+        <!-- Select the category you want from the list -->
+        <label for="categoryId">Category:</label>
+        <select 
+        required 
+        [(ngModel)]="newFundraiser.CATEGORY_ID" 
+        name="categoryId" 
+        #categoryId="ngModel">
+            <option value="1">Healthcare</option>
+            <option value="2">Education</option>
+            <option value="3">Environment</option>
+            <option value="4">Disaster Relief</option>
+            <option value="5">Entrepreneurship</option>
+            <option value="6">Technology</option>
+            <option value="7">Animal Protection</option>
+            <option value="8">Arts and Culture</option>
+            <option value="9">Sports</option>
+            <option value="10">Religion</option>
+        </select>
+        <div *ngIf="categoryId.invalid && categoryId.touched" class="error">
+            Category is required.
+        </div>
+
+        <!-- Click to upload new artist to the database -->
+        <button type="submit" [disabled]="fundraiserForm.invalid">Save</button>
+    </form>
+
+     <!-- Section for Updating an Existing Fundraiser -->
+    <h2>Update Fundraiser</h2>
+
+    <!-- Select the ID of the fundraiser you want to update -->
+    <form #updateForm="ngForm" (ngSubmit)="updateFundraiser()" novalidate>
+        <label for="updateFundraiserId">The ID of the fundraiser you want to update:</label>
+        <input type="number" 
+            placeholder="Please Enter Fundraiser ID" 
+            required 
+            [(ngModel)]="updateFundraiserId" 
+            name="updateFundraiserId" 
+            #fundraiserId="ngModel" />
+        <div *ngIf="fundraiserId.invalid && fundraiserId.touched" class="error">
+            Fundraiser ID is required and must be a number.
+        </div>
+    
+        <!-- The rest of the process is similar to adding a fundraiser. -->
+        <label for="updateOrganizer">Organizer:</label>
+        <input type="text" 
+               placeholder="Please Enter Organizer" 
+               required 
+               [(ngModel)]="upFundraiserDetail.ORGANIZER" 
+               name="updateOrganizer" 
+               #updateOrganizer="ngModel" />
+        <div *ngIf="updateOrganizer.invalid && updateOrganizer.touched" class="error">
+            Organizer is required.
+        </div>
+    
+        <label for="updateCaption">Caption:</label>
+        <input type="text" 
+               placeholder="Please Enter Caption" 
+               required 
+               [(ngModel)]="upFundraiserDetail.CAPTION" 
+               name="updateCaption" 
+               #updateCaption="ngModel" />
+        <div *ngIf="updateCaption.invalid && updateCaption.touched" class="error">
+            Caption is required.
+        </div>
+    
+        <label for="updateTargetFunding">Target Funding:</label>
+        <input type="number" 
+               placeholder="Please Enter Target Funding" 
+               required 
+               [(ngModel)]="upFundraiserDetail.TARGET_FUNDING" 
+               name="updateTargetFunding" 
+               min="0" 
+               #updateTargetFunding="ngModel" />
+        <div *ngIf="updateTargetFunding.invalid && updateTargetFunding.touched" class="error">
+            Target Funding is required and must be 0 or higher.
+        </div>
+    
+        <label for="updateCurrentFunding">Current Funding:</label>
+        <input type="number" 
+               placeholder="Please Enter Current Funding" 
+               required 
+               [(ngModel)]="upFundraiserDetail.CURRENT_FUNDING" 
+               name="updateCurrentFunding" 
+               min="0" 
+               #updateCurrentFunding="ngModel" />
+        <div *ngIf="updateCurrentFunding.invalid && updateCurrentFunding.touched" class="error">
+            Current Funding is required and must be 0 or higher.
+        </div>
+    
+        <label for="updateCity">City:</label>
+        <input type="text" 
+               placeholder="Please Enter City" 
+               required 
+               [(ngModel)]="upFundraiserDetail.CITY" 
+               name="updateCity" 
+               #updateCity="ngModel" />
+        <div *ngIf="updateCity.invalid && updateCity.touched" class="error">
+            City is required.
+        </div>
+    
+        <label for="updateActive">Active:</label>
+        <select required 
+                [(ngModel)]="upFundraiserDetail.ACTIVE" 
+                name="updateActive" 
+                #updateActive="ngModel">
+            <option [ngValue]="true">Active</option>
+            <option [ngValue]="false">Inactive</option>
+        </select>
+        <div *ngIf="updateActive.invalid && updateActive.touched" class="error">
+            Status is required.
+        </div>
+    
+        <label for="updateCategoryId">Category:</label>
+        <select required 
+                [(ngModel)]="upFundraiserDetail.CATEGORY_ID" 
+                name="updateCategoryId" 
+                #updateCategoryId="ngModel">
+            <option value="1">Healthcare</option>
+            <option value="2">Education</option>
+            <option value="3">Environment</option>
+            <option value="4">Disaster Relief</option>
+            <option value="5">Entrepreneurship</option>
+            <option value="6">Technology</option>
+            <option value="7">Animal Protection</option>
+            <option value="8">Arts and Culture</option>
+            <option value="9">Sports</option>
+            <option value="10">Religion</option>
+        </select>
+        <div *ngIf="updateCategoryId.invalid && updateCategoryId.touched" class="error">
+            Category is required.
+        </div>
+    
+        <button type="submit" [disabled]="updateForm.invalid">Update</button>
+    </form>
+
+    <!-- Dynamically generate a list containing the details of multiple fundraising projects and provide a delete button for each project. -->
+  <ul id="fundraiser-list">
+    <li *ngFor="let fundraiser of fundraisers" class="fundraiser-item">
+      <p><strong>Organizer:</strong> {{ fundraiser.ORGANIZER }}</p>
+      <p><strong>Caption:</strong> {{ fundraiser.CAPTION }}</p>
+      <p><strong>Fundraiser ID:</strong> {{ fundraiser.FUNDRAISER_ID }}</p>
+      <p><strong>Target Funding:</strong> {{ fundraiser.TARGET_FUNDING }}</p>
+      <p><strong>Current Funding:</strong> {{ fundraiser.CURRENT_FUNDING }}</p>
+      <p><strong>City:</strong> {{ fundraiser.CITY }}</p>
+      <p><strong>Active:</strong> {{ fundraiser.ACTIVE ? 'Yes' : 'No' }}</p>
+      <p><strong>Category ID:</strong> {{ fundraiser.CATEGORY_ID }}</p>
+      <button (click)="deleteFundraiser(fundraiser.FUNDRAISER_ID)" class="delete-button">Delete Fundraiser</button>
+    </li>
+  </ul>
+
+  <!-- Create a footer for my web page -->
+  <footer class="footer">
+      <p>&copy; 2024 WEB2-A3 QiaoKang Zhenrui Tian Group. All Rights Reserved.</p>
+  </footer>
+</div>
