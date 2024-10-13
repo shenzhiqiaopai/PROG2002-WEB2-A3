@@ -1,1 +1,71 @@
-<p>search-fundraisers works!</p>
+<!-- Header Section with Navigation -->
+<header>
+    <nav>
+        <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="SearchFundraisers.html">Search Fundraisers</a></li>
+            <li><a href="Fundraisers.html">Fundraiser</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content -->
+
+<main>
+    <section id="search-section">
+        <h2>Search Fundraisers</h2>
+
+        <form id="search-form">
+
+            <!--Enter the name of the organizer-->
+            <label for="organizer">Organizer:</label>
+            <input type="text" id="organizer" name="organizer"><br><br>
+
+            <!--Enter the fundraiser's captain-->
+            <label for="caption">Caption:</label>
+            <input type="text" id="caption" name="caption"><br><br>
+
+            <!--Enter target amount-->
+            <label for="target_funding">Target Funding (AUD):</label>
+            <input type="number" id="target_funding" name="target_funding"><br><br>
+
+            <!--Enter the current amount-->
+            <label for="current_funding">Current Funding (AUD):</label>
+            <input type="number" id="current_funding" name="current_funding"><br><br>
+
+            <!--Enter the fundraiser's city-->
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city"><br><br>
+
+            <!--Select the fundraiser category-->
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="">Select a Category</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Education">Education</option>
+                <option value="Environment">Environment</option>
+                <option value="Disaster Relief">Disaster Relief</option>
+                <option value="Entrepreneurship">Entrepreneurship</option>
+                <option value="Technology">Technology</option>
+                <option value="Animal Protection">Animal Protection</option>
+                <option value="Arts and Culture">Arts and Culture</option>
+                <option value="Sports">Sports</option>
+                <option value="Religion">Religion</option>
+            </select><br><br>
+
+            <!--Search button and Clear button-->
+            <button type="button" (click)="searchFundraisers()">Search</button>
+            <button type="button" (click)="clearCheckboxes()">Clear</button>
+        </form>
+        
+        <!--Here are the results-->
+        <h2>Results:</h2>
+        <div id="error-message" style="color: red; font-weight: bold;text-align:center"></div>
+        <div id="results"></div>
+    </section>
+
+        <!-- Footer -->
+<footer>
+    <p>&copy; 2024 Qiao Kang Fundraising Web. All Rights Reserved.</p>
+</footer>
+</main>
