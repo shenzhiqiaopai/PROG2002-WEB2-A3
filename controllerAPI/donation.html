@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make a Donation</title>
+    <link rel="stylesheet" href="donation.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('donationForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submit
+
+                const amount = document.getElementById('amount').value;
+                const fundraiserId = document.getElementById('fundraiserId').value;
+                const giver = document.getElementById('giver').value;
+
+                // Check if all fields are filled
+                if (!amount || !fundraiserId || !giver) {
+                    alert('Please fill in all the required fields.');
+                    return;
+                }
+
+                // Get the current date and time
+                const date = new Date().toISOString();
+
+                // Create the data to be sent to the server
+                const formData = {
+                    amount: parseFloat(amount),
+                    fundraiserId: parseInt(fundraiserId),
+                    giver: giver,
+                    date: date
+                };
+
+                // Send the data to the server using fetch
+                fetch('http://localhost:3060/api/donation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data); // Handle the response data
+                    alert('Donation submitted successfully!');
+                })
+                .catch(error => {
+                    console.error('Error submitting donation:', error);
+                    alert('Failed to submit donation. Please try again.');
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Donation Page</h1>
+    </header>
+
+    <div class="container">
+        <form class="donate-form" id="donationForm">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" required><br><br>
+
+            <label for="fundraiserId">Fundraiser ID:</label>
+            <input type="number" id="fundraiserId" name="fundraiserId" required><br><br>
+
+            <label for="giver">Giver Name:</label>
+            <input type="text" id="giver" name="giver" required><br><br>
+
+            <button type="submit" class="donate-btn">Submit Donation</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Donation Page. All rights reserved.</p>
+    </footer>
+</body>
+</html>
