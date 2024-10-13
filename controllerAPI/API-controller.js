@@ -167,20 +167,25 @@ router.delete("/fundraiser/:id", (req, res) => {
 
 // POST method: Insert a new donation for a nominated fundraiser
 router.post("/donation", (req, res) => {
-    const { amount, fundraiserId, donorName } = req.body;
+    const { amount, fundraiserId, giver, date } = req.body; // 使用'giver'代替'donorName'
     
-    // 确保客户端提交了所有必要的信息
-    if (!amount || !fundraiserId || !donorName) {
-        return res.status(400).send("Missing required donation information");
+    if (!amount || !fundraiserId || !giver || !date) {
+        return res.status(400).json({ error: "Missing required donation information" });
     }
 
-    const query = "INSERT INTO DONATION (amount, FUNDRAISER_ID, DONOR_NAME) VALUES (?, ?, ?)";
-    connection.query(query, [amount, fundraiserId, donorName], (err, result) => {
+    // 确保date是一个有效的日期格式
+    const donationDate = new Date(date);
+    if (isNaN(donationDate)) {
+        return res.status(400).json({ error: "Invalid date format" });
+    }
+
+    const query = "INSERT INTO DONATION (amount, FUNDRAISER_ID, GIVER, DATE) VALUES (?, ?, ?, ?)"; // 包含DATE字段
+    connection.query(query, [amount, fundraiserId, giver, donationDate], (err, result) => {
         if (err) {
             console.error("Failed to insert donation:", err);
-            res.status(500).send("Server error");
+            res.status(500).json({ error: "Server error" });
         } else {
-            res.send({ message: "Donation created successfully", donationId: result.insertId });
+            res.json({ message: "Donation created successfully", donationId: result.insertId });
         }
     });
 });
