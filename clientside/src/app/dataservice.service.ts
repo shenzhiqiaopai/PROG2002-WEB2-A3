@@ -13,29 +13,31 @@ export class DataserviceService {
   private url = "http://localhost:3060/api";
 
 
-  searchFundraiser(organizer?:string, caption?:string, targetFunding?:string, currentFunding?:string, city?:string, category?:string):Observable<Fundraiser[]>{
+  searchFundraiser(organizer?: string, caption?: string, targetFunding?: string, currentFunding?: string, city?: string, category?: string): Observable<Fundraiser[]> {
     let params = new HttpParams();
-
-    if(organizer){
-      params.append('organizer',organizer);
+  
+    if (organizer) {
+      params = params.append('organizer', organizer); // 重新赋值
     }
-    if(caption){
-      params.append('caption',caption);
+    if (caption) {
+      params = params.append('caption', caption); // 重新赋值
     }
-    if(targetFunding){
-      params.append('targer_funding',targetFunding);
+    if (targetFunding) {
+      params = params.append('target_funding', targetFunding); // 重新赋值
     }
-    if(currentFunding){
-      params.append('current_funding',currentFunding);
+    if (currentFunding) {
+      params = params.append('current_funding', currentFunding); // 重新赋值
     }
-    if(city){
-      params.append('city',city)
+    if (city) {
+      params = params.append('city', city); // 重新赋值
     }
-    if(category){
-      params.append('category_name',category)
+    if (category) {
+      params = params.append('category_name', category); // 重新赋值
     }
-    return this.http.get<Fundraiser[]>(`${this.url}/search`, { params })
+  
+    return this.http.get<Fundraiser[]>(`${this.url}/search`, { params });
   }
+  
 
   getFundraiserDetails(id: number): Observable<Fundraiser[]>{
     return this.http.get<Fundraiser[]>(`${this.url}/${id}`);

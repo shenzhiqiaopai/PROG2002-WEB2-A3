@@ -5,7 +5,7 @@
             <li><a [routerLink]="['/home']">Home</a></li>
             <li><a [routerLink]="['/fundraisers']">Fundraiser</a></li>
             <li><a [routerLink]="['/search-fundraisers']">Search Fundraisers</a></li>
-            <li><a [routerLink]="['/donation']">Donation</a></li>
+            <li><a [routerLink]="['/donation', fundraiserId]">Donation</a></li> <!-- 更新路由链接 -->
         </ul>
     </nav>
 </header>
@@ -16,7 +16,7 @@
         <input type="number" id="amount" name="amount" required><br><br>
 
         <label for="fundraiserId">Fundraiser ID:</label>
-        <input type="number" id="fundraiserId" name="fundraiserId" required><br><br>
+        <input type="number" id="fundraiserId" name="fundraiserId" [value]="fundraiserId" readonly required><br><br> <!-- 使用 Angular 数据绑定填充 ID -->
 
         <label for="giver">Giver Name:</label>
         <input type="text" id="giver" name="giver" required><br><br>

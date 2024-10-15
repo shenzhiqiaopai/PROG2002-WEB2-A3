@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'donation/:id', component: DonationComponent },
   { path: 'fundraiser/:id', component: FundraisersComponent },
+  { path: 'donation/:id', component: DonationComponent },
   { path: 'search-fundraisers', component: SearchFundraisersComponent },
   // 可以添加更多路由规则
 ];
