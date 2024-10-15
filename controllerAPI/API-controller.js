@@ -105,7 +105,7 @@ router.get("/search", (req, res) => {
 //GET method: Search fundraiser details by ID
 router.get("/:id", (req, res) => {
     connection.query(
-        `SELECT FUNDRAISER.*, CATEGORY.NAME AS category_name
+        `SELECT FUNDRAISER.*, CATEGORY.NAME AS Category_Name
         FROM FUNDRAISER
         JOIN CATEGORY ON FUNDRAISER.CATEGORY_ID = CATEGORY.CATEGORY_ID
         WHERE FUNDRAISER.FUNDRAISER_ID = `+ req.params.id,

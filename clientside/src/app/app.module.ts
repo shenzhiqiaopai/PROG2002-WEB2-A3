@@ -7,6 +7,10 @@ import { DonationComponent } from './components/donation/donation.component';
 import { HomeComponent } from './components/home/home.component';
 import { FundraisersComponent } from './components/fundraisers/fundraisers.component';
 import { SearchFundraisersComponent } from './components/search-fundraisers/search-fundraisers.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+
+
 
 @NgModule({
   declarations: [
@@ -14,11 +18,13 @@ import { SearchFundraisersComponent } from './components/search-fundraisers/sear
     HomeComponent,
     DonationComponent,
     FundraisersComponent,
-    SearchFundraisersComponent
+    SearchFundraisersComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

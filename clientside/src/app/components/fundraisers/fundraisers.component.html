@@ -12,8 +12,17 @@
 <div class="container">
     <div id="fundraiserDetails" class="fundraiser-details">
         <!-- Fundraiser details will be displayed here -->
+        <div *ngIf="fundraiser">
+            <h2>{{ fundraiser.CAPTION }}</h2>
+            <p><strong>Organizer:</strong> {{ fundraiser.ORGANIZER }}</p>
+            <p><strong>Target Funding:</strong> {{ fundraiser.TARGET_FUNDING }} AUD</p>
+            <p><strong>Current Funding:</strong> {{ fundraiser.CURRENT_FUNDING }} AUD</p>
+            <p><strong>City:</strong> {{ fundraiser.CITY }}</p>
+            <p><strong>Category:</strong> {{ fundraiser.Category_Name }}</p>
+            <p><strong>Status:</strong> {{ fundraiser.ACTIVE ? 'Active' : 'Inactive' }}</p>
+          </div>
     </div>
-    <button class="donate-btn" (click)="showDonateMessage()">Donate</button>
+    <button class="donate-btn" routerLink="/donation/{{fundraiser.FUNDRAISER_ID}}">Donate</button>
 </div>
 
 <!-- Footer -->

@@ -8,8 +8,8 @@ import { SearchFundraisersComponent } from './components/search-fundraisers/sear
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // 重定向根路径到'/home'
   { path: 'home', component: HomeComponent },
-  { path: 'donation', component: DonationComponent },
-  { path: 'fundraisers', component: FundraisersComponent },
+  { path: 'donation/:id', component: DonationComponent },
+  { path: 'fundraiser/:id', component: FundraisersComponent },
   { path: 'search-fundraisers', component: SearchFundraisersComponent },
   // 可以添加更多路由规则
 ];
